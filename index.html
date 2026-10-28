@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStore | Modern Shopping Experience</title>
+  <meta name="description" content="Shop the latest trends in electronics, fashion, footwear, and home decor with AuraStore. Enjoy free shipping and easy returns.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <span>🎉 Exclusive Offer: Use code <strong>AURA15</strong> for 15% off your order!</span>
+      <div class="announcement-links">
+        <span><i class="fa-solid fa-truck-fast"></i> Free Shipping on orders over $50</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+        <span>Aura<strong>Store</strong></span>
+      </a>
+
+      <!-- Live Search Box -->
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search products, brands, or categories..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search-btn" title="Clear search" style="display: none;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="action-btn" id="wishlistToggleBtn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="badge" id="wishlistCount">0</span>
+        </button>
+        <button class="action-btn cart-btn" id="cartToggleBtn" title="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="badge" id="cartCount">0</span>
+          <span class="cart-total-preview" id="cartHeaderTotal">$0.00</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-text">
+        <span class="hero-pill"><i class="fa-solid fa-bolt"></i> Spring Summer 2026 Collection</span>
+        <h1 class="hero-title">Elevate Your Everyday Style & Tech</h1>
+        <p class="hero-subtitle">Curated premium products crafted for comfort, performance, and modern living. Discover our best-sellers with unbeatable deals.</p>
+        <div class="hero-buttons">
+          <a href="#catalog" class="btn btn-primary"><i class="fa-solid fa-basket-shopping"></i> Explore Catalog</a>
+          <button class="btn btn-outline" id="heroDealBtn"><i class="fa-solid fa-tag"></i> View Deals</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-featured">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80" alt="Premium Wireless Headphones" loading="lazy">
+          <div class="featured-tag">🔥 Best Seller</div>
+          <div class="featured-info">
+            <h3>Acoustic Pro Wireless</h3>
+            <div class="featured-price">
+              <span class="current">$199.99</span>
+              <span class="original">$279.99</span>
+            </div>
+            <button class="btn btn-sm btn-featured" onclick="quickAddToCart(1)">Quick Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Features Bar -->
+  <section class="features-bar">
+    <div class="container features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+        <div>
+          <h4>Free Worldwide Delivery</h4>
+          <p>On all orders above $50</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <h4>Secure Payments</h4>
+          <p>256-bit SSL encrypted checkout</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
+        <div>
+          <h4>30-Day Easy Returns</h4>
+          <p>Hassle-free money back guarantee</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+        <div>
+          <h4>24/7 Live Support</h4>
+          <p>Friendly expert support team</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Store Section -->
+  <main class="container main-content" id="catalog">
+    <!-- Controls Bar -->
+    <div class="catalog-controls">
+      <!-- Category Pills -->
+      <div class="category-filters" id="categoryFilters">
+        <button class="filter-chip active" data-category="all">All Products</button>
+        <button class="filter-chip" data-category="electronics">Electronics</button>
+        <button class="filter-chip" data-category="fashion">Fashion</button>
+        <button class="filter-chip" data-category="footwear">Footwear</button>
+        <button class="filter-chip" data-category="accessories">Accessories</button>
+        <button class="filter-chip" data-category="home">Home & Living</button>
+      </div>
+
+      <!-- Sorting & Info -->
+      <div class="catalog-sort">
+        <label for="sortSelect"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort by:</label>
+        <select id="sortSelect">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+          <option value="popular">Most Popular</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Active Search Filter Feedback -->
+    <div class="results-feedback" id="resultsFeedback" style="display: none;">
+      <span>Showing results for "<strong id="searchTermDisplay"></strong>"</span>
+      <button class="btn-clear-filter" id="resetFiltersBtn">Reset Filters</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <i class="fa-solid fa-magnifying-glass-chart"></i>
+      <h3>No products found</h3>
+      <p>Try adjusting your search or category filter to find what you're looking for.</p>
+      <button class="btn btn-primary" id="emptyResetBtn">View All Products</button>
+    </div>
+  </main>
+
+  <!-- Product Quick View Modal -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-dialog modal-lg">
+      <button class="modal-close-btn" id="closeQuickViewBtn" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="quickview-content" id="quickViewBody">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer -->
+  <div class="drawer-backdrop" id="wishlistDrawerBackdrop"></div>
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i class="fa-solid fa-heart text-danger"></i>
+        <h3>My Wishlist (<span id="wishlistItemsCount">0</span>)</h3>
+      </div>
+      <button class="drawer-close-btn" id="closeWishlistBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-body" id="wishlistBody">
+      <!-- Items dynamically populated -->
+    </div>
+  </aside>
+
+  <!-- Cart Drawer -->
+  <div class="drawer-backdrop" id="cartDrawerBackdrop"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h3>Shopping Cart (<span id="cartDrawerCount">0</span>)</h3>
+      </div>
+      <button class="drawer-close-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="drawer-body" id="cartBody">
+      <!-- Cart items injected here -->
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+      <!-- Coupon Box -->
+      <div class="promo-box">
+        <div class="promo-input-group">
+          <input type="text" id="couponCodeInput" placeholder="Promo code (try AURA15)" uppercase>
+          <button class="btn btn-dark" id="applyCouponBtn">Apply</button>
+        </div>
+        <div class="applied-coupon-tag" id="appliedCouponTag" style="display: none;">
+          <span>Code <strong>AURA15</strong> applied (-15%)</span>
+          <button id="removeCouponBtn" title="Remove coupon">&times;</button>
+        </div>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div class="cart-breakdown">
+        <div class="breakdown-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="breakdown-row text-success" id="discountRow" style="display: none;">
+          <span>Discount</span>
+          <span id="cartDiscount">-$0.00</span>
+        </div>
+        <div class="breakdown-row">
+          <span>Shipping</span>
+          <span id="cartShipping">FREE</span>
+        </div>
+        <div class="breakdown-row total-row">
+          <span>Estimated Total</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="proceedCheckoutBtn">
+        Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <button class="btn btn-text btn-block" id="clearCartBtn">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-dialog checkout-dialog">
+      <button class="modal-close-btn" id="closeCheckoutBtn" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="checkoutFormStep">
+        <div class="checkout-header">
+          <h2>Secure Checkout</h2>
+          <p>Please enter your shipping and payment details.</p>
+        </div>
+
+        <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+          <div class="form-section-title"><i class="fa-solid fa-location-dot"></i> Shipping Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" required placeholder="john@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Street Address</label>
+            <input type="text" id="address" required placeholder="123 Market Street, Apt 4B">
+          </div>
+
+          <div class="form-row three-cols">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" required placeholder="New York">
+            </div>
+            <div class="form-group">
+              <label for="state">State / Province</label>
+              <input type="text" id="state" required placeholder="NY">
+            </div>
+            <div class="form-group">
+              <label for="zipCode">ZIP / Postal Code</label>
+              <input type="text" id="zipCode" required placeholder="10001">
+            </div>
+          </div>
+
+          <div class="form-section-title"><i class="fa-regular fa-credit-card"></i> Payment Method</div>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="card" checked>
+              <span><i class="fa-solid fa-credit-card"></i> Credit / Debit Card</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="paypal">
+              <span><i class="fa-brands fa-paypal"></i> PayPal</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="cod">
+              <span><i class="fa-solid fa-hand-holding-dollar"></i> Cash on Delivery</span>
+            </label>
+          </div>
+
+          <div class="checkout-summary-box">
+            <div class="breakdown-row total-row">
+              <span>Total Payable Amount</span>
+              <span id="checkoutTotal">$0.00</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitOrderBtn">
+            <span id="submitOrderBtnText">Confirm & Place Order</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Order Success State -->
+      <div id="checkoutSuccessStep" style="display: none;" class="order-success-card">
+        <div class="success-icon-wrapper">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2>Thank You for Your Order!</h2>
+        <p class="order-number">Order ID: <strong id="confirmedOrderId">#ORD-94281</strong></p>
+        <p class="order-desc">We've received your order and sent a confirmation receipt to your email. Your items will be packed and dispatched shortly!</p>
+        <div class="order-actions">
+          <button class="btn btn-primary" id="continueShoppingBtn">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <a href="#" class="brand-logo footer-logo">
+          <div class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <span>Aura<strong>Store</strong></span>
+        </a>
+        <p>Your one-stop destination for curated fashion, premium tech essentials, and modern lifestyle products. Designed with quality and speed.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#catalog">Shop All</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('electronics')">Electronics</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('fashion')">Fashion & Apparel</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('footwear')">Footwear</a></li>
+          <li><a href="#catalog" onclick="filterByCategory('accessories')">Accessories</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#" onclick="showToast('Help Center available 24/7!', 'info')">Track Your Order</a></li>
+          <li><a href="#" onclick="showToast('Shipping is free over $50!', 'info')">Shipping & Delivery</a></li>
+          <li><a href="#" onclick="showToast('Returns are free within 30 days', 'info')">Returns & Refunds</a></li>
+          <li><a href="#" onclick="showToast('Payments are encrypted with 256-bit SSL', 'info')">Secure Checkout</a></li>
+          <li><a href="#" onclick="showToast('Contact us at support@aurastore.com', 'info')">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the Loop</h4>
+        <p>Subscribe to receive exclusive drops, secret discount vouchers, and new product alerts.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Enter your email address" required>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+        <div class="payment-cards-icons">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-cc-amex"></i>
+          <i class="fa-brands fa-cc-paypal"></i>
+          <i class="fa-brands fa-cc-apple-pay"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-flex">
+        <p>&copy; 2026 AuraStore. Built with HTML5, CSS3, & Modern JavaScript.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
