@@ -55,14 +55,9 @@ Follow these simple steps to push this project to your GitHub account:
 Open your terminal in this project directory and run:
 
 ```bash
-# 1. Rename the default branch to main
-git branch -M main
-
-# 2. Add your GitHub repository as the remote origin (replace YOUR-USERNAME with your actual GitHub username):
-git remote add origin https://github.com/YOUR-USERNAME/shopping-website.git
-
-# 3. Push your code to GitHub
-git push -u origin main
+# Clone the repository:
+git clone https://github.com/surya192007/shopping-website.git
+cd shopping-website
 ```
 
 ---
@@ -71,13 +66,14 @@ git push -u origin main
 
 You can host this website online for free using GitHub Pages:
 
-1. Open your repository on **GitHub.com**.
+1. Open your repository at **[github.com/surya192007/shopping-website](https://github.com/surya192007/shopping-website)**.
 2. Go to **Settings** > **Pages** (under the "Code and automation" section on the left sidebar).
 3. Under **Build and deployment** > **Branch**:
    - Select `main` from the dropdown.
    - Select `/ (root)` folder.
    - Click **Save**.
 4. In 1–2 minutes, your live store will be published at:
+   `https://surya192007.github.io/shopping-website/`
    `https://YOUR-USERNAME.github.io/shopping-website/`
 
 ---
